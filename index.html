@@ -238,4 +238,56 @@
 </head>
 <body>
 
-  
+
+
+
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>Multiplayer Game</title>
+</head>
+<body>
+  <h1>Multiplayer Box Mover</h1>
+  <canvas id="gameCanvas" width="400" height="400" style="border:1px solid black;"></canvas>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let myPlayer = { x: 50, y: 50, color: "blue" };
+    let otherPlayer = { x: 100, y: 100, color: "red" };
+
+    const ws = new WebSocket("ws://localhost:8080");
+
+    ws.onmessage = (message) => {
+      const data = JSON.parse(message.data);
+      if (data.type === "position") {
+        otherPlayer.x = data.x;
+        otherPlayer.y = data.y;
+        draw();
+      }
+    };
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowUp") myPlayer.y -= 5;
+      if (e.key === "ArrowDown") myPlayer.y += 5;
+      if (e.key === "ArrowLeft") myPlayer.x -= 5;
+      if (e.key === "ArrowRight") myPlayer.x += 5;
+      draw();
+      ws.send(JSON.stringify({ type: "position", x: myPlayer.x, y: myPlayer.y }));
+    });
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = myPlayer.color;
+      ctx.fillRect(myPlayer.x, myPlayer.y, 30, 30);
+
+      ctx.fillStyle = otherPlayer.color;
+      ctx.fillRect(otherPlayer.x, otherPlayer.y, 30, 30);
+    }
+
+    draw();
+  </script>
+</body>
+</html>
+
