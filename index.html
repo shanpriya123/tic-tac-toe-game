@@ -71,7 +71,7 @@
   <p id="status">Player X's turn</p>
   <button onclick="restartGame()">🔄 Restart</button> 
 
-  <audio id="bg-music" src="music.mp3" loop></audio>
+ 
 
 
   <script>
@@ -137,28 +137,3 @@
 
 
 
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Auto Music Play</title>
-</head>
-<body onclick="startMusicOnce()">
-  <h1>Welcome to Tic Tac Toe 🎵</h1>
-  <audio id="bg-music" src="music.mp3" loop></audio>
-
-  <script>
-    let musicStarted = false;
-
-    function startMusicOnce() {
-      if (!musicStarted) {
-        const audio = document.getElementById("bg-music");
-        audio.play().catch(err => {
-          console.log("Autoplay blocked:", err);
-        });
-        musicStarted = true;
-      }
-    }
-  </script>
-</body>
-</html>
