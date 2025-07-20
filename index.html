@@ -69,7 +69,10 @@
     <div class="cell" data-index="8"></div>
   </div>
   <p id="status">Player X's turn</p>
-  <button onclick="restartGame()">🔄 Restart</button>
+  <button onclick="restartGame()">🔄 Restart</button> 
+
+  <audio id="bg-music" src="music.mp3" loop></audio>
+
 
   <script>
     let board = ["", "", "", "", "", "", "", "", ""];
@@ -122,7 +125,20 @@
     cells.forEach(cell => cell.addEventListener("click", handleClick));
   </script>
 </body>
-</html>
+</html> 
+
+let musicStarted = false;
+
+function startMusicOnce() {
+  if (!musicStarted) {
+    const music = document.getElementById("bg-music");
+    music.play().catch((err) => {
+      console.log("Autoplay blocked:", err);
+    });
+    musicStarted = true;
+  }
+}
+
 
 
 
