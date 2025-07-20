@@ -132,6 +132,36 @@
 
 
 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tic Tac Toe with Music</title>
+</head>
+<body>
+  <h1>🎵 Test Music Play</h1>
+
+  <!-- Add your local music file here -->
   <audio id="bg-music" src="music.mp3" loop></audio>
-<button onclick="playMusic()">▶ Play Music</button>
-<button onclick="pauseMusic()">⏸ Pause Music</button>
+
+  <button onclick="playMusic()">▶ Play Music</button>
+  <button onclick="pauseMusic()">⏸ Pause Music</button>
+
+  <script>
+    const bgMusic = document.getElementById("bg-music");
+
+    function playMusic() {
+      bgMusic.play().then(() => {
+        console.log("Music started");
+      }).catch(err => {
+        alert("Browser blocked autoplay. You must click a button first.");
+        console.error(err);
+      });
+    }
+
+    function pauseMusic() {
+      bgMusic.pause();
+    }
+  </script>
+</body>
+</html>
