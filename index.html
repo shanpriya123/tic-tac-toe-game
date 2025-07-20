@@ -127,17 +127,6 @@
 </body>
 </html> 
 
-let musicStarted = false;
-
-function startMusicOnce() {
-  if (!musicStarted) {
-    const music = document.getElementById("bg-music");
-    music.play().catch((err) => {
-      console.log("Autoplay blocked:", err);
-    });
-    musicStarted = true;
-  }
-}
 
 
 
