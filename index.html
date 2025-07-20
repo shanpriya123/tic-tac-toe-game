@@ -132,6 +132,26 @@
 
 
 
+<body onclick="startMusicOnce()">
+  <h1>Tic Tac Toe</h1>
+
+  <audio id="bg-music" src="music.mp3" loop></audio>
+
+  <div class="board" id="board">...</div>
+
+  <script>
+    let musicStarted = false;
+    function startMusicOnce() {
+      if (!musicStarted) {
+        const music = document.getElementById("bg-music");
+        music.play().catch(err => console.log("Blocked:", err));
+        musicStarted = true;
+      }
+    }
+
+    // rest of your game code...
+  </script>
+</body>
 
 
 
