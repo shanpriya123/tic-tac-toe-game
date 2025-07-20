@@ -3,9 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <title>Tic Tac Toe</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #333;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 10px;
+      justify-content: center;
+      margin: 20px auto;
+    }
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+      border: 2px solid #333;
+      font-size: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .cell:hover {
+      background-color: #eee;
+    }
+    #status {
+      font-size: 20px;
+      margin: 15px;
+      color: #444;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005f73;
+    }
+  </style>
 </head>
 <body>
+
   <h1>Tic Tac Toe</h1>
   <div class="board" id="board">
     <div class="cell" data-index="0"></div>
@@ -18,9 +68,58 @@
     <div class="cell" data-index="7"></div>
     <div class="cell" data-index="8"></div>
   </div>
-  <p id="status"></p>
-  <button onclick="restartGame()">Restart</button>
+  <p id="status">Player X's turn</p>
+  <button onclick="restartGame()">🔄 Restart</button>
 
-  <script src="script.js"></script>
+  <script>
+    let board = ["", "", "", "", "", "", "", "", ""];
+    let currentPlayer = "X";
+    let gameActive = true;
+
+    const statusDisplay = document.getElementById("status");
+    const cells = document.querySelectorAll(".cell");
+
+    function handleClick(event) {
+      const index = event.target.getAttribute("data-index");
+      if (board[index] !== "" || !gameActive) return;
+
+      board[index] = currentPlayer;
+      event.target.textContent = currentPlayer;
+
+      if (checkWinner()) {
+        statusDisplay.textContent = `🎉 Player ${currentPlayer} wins!`;
+        gameActive = false;
+      } else if (board.every(cell => cell !== "")) {
+        statusDisplay.textContent = "😐 It's a draw!";
+        gameActive = false;
+      } else {
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        statusDisplay.textContent = `Player ${currentPlayer}'s turn`;
+      }
+    }
+
+    function checkWinner() {
+      const winPatterns = [
+        [0,1,2], [3,4,5], [6,7,8],
+        [0,3,6], [1,4,7], [2,5,8],
+        [0,4,8], [2,4,6]
+      ];
+
+      return winPatterns.some(pattern => {
+        const [a, b, c] = pattern;
+        return board[a] && board[a] === board[b] && board[a] === board[c];
+      });
+    }
+
+    function restartGame() {
+      board = ["", "", "", "", "", "", "", "", ""];
+      currentPlayer = "X";
+      gameActive = true;
+      statusDisplay.textContent = "Player X's turn";
+      cells.forEach(cell => (cell.textContent = ""));
+    }
+
+    cells.forEach(cell => cell.addEventListener("click", handleClick));
+  </script>
 </body>
 </html>
