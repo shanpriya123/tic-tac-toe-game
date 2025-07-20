@@ -1,55 +1,54 @@
-let currentjplayer = "X";
-const buttons = document.querySelectorAll("button");
-buttons.forEach(button => {
-button.addEventListener("click", () => {
-// if already clicked, do nothing 
-if (button.textContent !== " ") return;
-// set player mark 
-button.textContent = currentplayer;
-// check winner
-if (checkwinner()) {
-set timeout(c) => {
-alert(currentplayer + "wins1");
-resetGame();
-}, 100);
-return;
+let board = ["", "", "", "", "", "", "", "", ""];
+let currentPlayer = "X";
+let gameActive = true;
+
+const statusDisplay = document.getElementById("status");
+const cells = document.querySelectorAll(".cell");
+
+function handleClick(event) {
+  const index = event.target.getAttribute("data-index");
+
+  if (board[index] !== "" || !gameActive) return;
+
+  board[index] = currentPlayer;
+  event.target.textContent = currentPlayer;
+
+  if (checkWinner()) {
+    statusDisplay.textContent = `Player ${currentPlayer} wins! 🎉`;
+    gameActive = false;
+  } else if (board.every(cell => cell !== "")) {
+    statusDisplay.textContent = "It's a draw!";
+    gameActive = false;
+  } else {
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    statusDisplay.textContent = `Player ${currentPlayer}'s turn`;
+  }
 }
-// check draw 
-if (o...buttonsp.every(btn => btn
-.textcontent !== "")) {
-settimeout(c) => {
-alert("it's draw!");
-resetgame();
-}, 100);
-return;
+
+function checkWinner() {
+  const winCombos = [
+    [0,1,2], [3,4,5], [6,7,8],
+    [0,3,6], [1,4,7], [2,5,8],
+    [0,4,8], [2,4,6]
+  ];
+
+  return winCombos.some(combo => {
+    const [a, b, c] = combo;
+    return (
+      board[a] !== "" &&
+      board[a] === board[b] &&
+      board[a] === board[c]
+    );
+  });
 }
-// switch player
-currentplayer = currentplayer == "X"?
-"O" : "X";
-});
-});
-funciton checkwinner(){
-const comboss = [
-[0,1,1],[3,4,5],[6,7,8], //
-[0,3,6],[1,4,7],[2,5,8], //
-[0,4,8],[2,4,6] //
-diagonals
-],
-return combos.some(conbo => {
-const [a,b,c] = conbo;
-return (
-buttons[a].textcontent ===
-currentplayer &&
-buttons[b].textcontent ===
-currentplayer &&
-buttons[c].textcontent ===
-currentplayer 
-);
-});
+
+function restartGame() {
+  board = ["", "", "", "", "", "", "", "", ""];
+  currentPlayer = "X";
+  gameActive = true;
+  statusDisplay.textContent = "Player X's turn";
+  cells.forEach(cell => cell.textContent = "");
 }
-function resetgame() {
-buttons.forEach(button => {
-button.textcontent =" ";
-});
-currentplayer = "X";
-}
+
+cells.forEach(cell => cell.addEventListener("click", handleClick));
+statusDisplay.textContent = "Player X's turn";
