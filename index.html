@@ -131,62 +131,7 @@
 
 
 
-
-<body onclick="startMusicOnce()">
-  <h1>Tic Tac Toe</h1>
-
-  <audio id="bg-music" src="music.mp3" loop></audio>
-
-  <div class="board" id="board">...</div>
-
-  <script>
-    let musicStarted = false;
-    function startMusicOnce() {
-      if (!musicStarted) {
-        const music = document.getElementById("bg-music");
-        music.play().catch(err => console.log("Blocked:", err));
-        musicStarted = true;
-      }
-    }
-
-    // rest of your game code...
-  </script>
-</body>
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Tic Tac Toe with Music</title>
-</head>
-<body onclick="startMusicOnce()">
-  <h1>Tic Tac Toe 🎵</h1>
-
-  <!-- Online music file from SoundHelix (free to use) -->
-  <audio id="bg-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
-
-  <!-- Your game content can go here -->
-  <p>Click anywhere to start the music automatically.</p>
-
-  <script>
-    let musicStarted = false;
-
-    function startMusicOnce() {
-      if (!musicStarted) {
-        const audio = document.getElementById("bg-music");
-        audio.play().then(() => {
-          console.log("🎵 Music started");
-        }).catch((err) => {
-          console.error("❌ Autoplay blocked:", err);
-        });
-        musicStarted = true;
-      }
-    }
-  </script>
-</body>
-</html>
-
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
 
