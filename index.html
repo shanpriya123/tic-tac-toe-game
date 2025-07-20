@@ -135,3 +135,29 @@
   <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
 
+
+<script>
+  const bgMusic = document.getElementById("bgMusic");
+  const musicBtn = document.getElementById("musicBtn");
+
+  window.addEventListener("click", () => {
+    bgMusic.play();
+    musicBtn.innerText = "Pause Music";
+  }, { once: true});
+
+  function toggleMusic() {
+    if (bgMusic.paused){
+      bgMusic.play();
+      musicBtn.innerText = "Pause Music";
+  } else {
+      bgMusic.pause();
+      musicBtn.innerText = "Play Music";
+  }
+  }
+</script>
+
+</body>
+</html>
+
+                
+</script>
