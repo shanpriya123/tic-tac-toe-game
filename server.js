@@ -49,3 +49,29 @@ io.on("connection", (socket) => {
 server.listen(3000, () => {
     console.log("Server running on port 3000");
 });
+
+
+
+const socket = io("http://localhost:3000");
+
+socket.on("joinedRoom", (roomId) => {
+    console.log("Joined Room:", roomId);
+});
+
+socket.on("waitingForPlayer", (roomId) => {
+    console.log("Waiting for another player in", roomId);
+});
+
+socket.on("startGame", (data) => {
+    console.log("Game Started in Room:", data.roomId);
+});
+
+// On making a move
+function onCellClick(cellIndex) {
+    const move = { cell: cellIndex, player: "X" }; // or "O"
+    socket.emit("makeMove", { roomId: currentRoomId, move });
+}
+
+socket.on("moveMade", (move) => {
+    updateBoard(move.cell, move.player); // your custom function
+});
