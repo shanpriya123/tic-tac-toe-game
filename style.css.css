@@ -1,1 +1,36 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #fff00f;
+  margin: 0;
+  padding: 20px;
+}
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+#game {
+  display: inline-block;
+  border: 4px solid #444;
+  padding: 10px;
+  background-color: blue;
+  border-radius: 10px;
+}
+.row {
+  display: flex;
+}
+button {
+  width: 80px;
+  height: 80px;
+  font-seze: 32px;
+  margin: 5px;
+  cursor: pointer;
+  background-color: #ffe6e6;
+  border: 2px solid #888;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+button:hover {
+  background-color: #d0d0d0;
+}
 
