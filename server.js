@@ -75,3 +75,21 @@ function onCellClick(cellIndex) {
 socket.on("moveMade", (move) => {
     updateBoard(move.cell, move.player); // your custom function
 });
+
+
+// Inside io.on("connection")
+let joined = false;
+for (let roomId in rooms) {
+    if (rooms[roomId].length < 2) {
+        rooms[roomId].push(socket.id);
+        socket.join(roomId);
+        const playerIndex = rooms[roomId].indexOf(socket.id);
+        const role = playerIndex === 0 ? "X" : "O";
+        socket.emit("joinedRoom", { roomId, role });
+        if (rooms[roomId].length === 2) {
+            io.to(roomId).emit("startGame", { roomId });
+        }
+        joined = true;
+        break;
+    }
+}
