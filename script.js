@@ -14,3 +14,20 @@ function playTurn(index) {
     }
   }
 }
+
+
+
+function getBestMove(board,symbol) {
+  // implement minimax logic here
+// returns index (0to8) fir best move
+}
+
+// function to create player based on user choice 
+function create players(mode) {
+  if (mode === 'single') {
+    return {
+      player1: {type: 'human', symbol: 'X' },
+      player2: {type: 'ai', symbol: 'O' }
+    };
+  } else if (mode === 'multi') {
+    return {
