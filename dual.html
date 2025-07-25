@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tic Tac Toe - Opposite Sides</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    #game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #top-player,
+    #bottom-player {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 18px;
+      margin: 10px;
+    }
+
+    #game-board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 5px;
+      margin: 10px 0;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: white;
+      font-size: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 2px solid #333;
+    }
+
+    #status {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tic Tac Toe</h1>
+
+  <div id="game-container">
+    <div id="top-player">Player O</div>
+
+    <div id="game-board"></div>
+
+    <div id="bottom-player">Player X</div>
+  </div>
+
+  <p id="status">Player X's turn</p>
+  <button onclick="restartGame()">Restart Game</button>
+
+  <script>
+    const board = Array(9).fill(null);
+    let currentPlayer = 'X';
+    let gameActive = true;
+
+    const statusText = document.getElementById('status');
+    const gameBoard = document.getElementById('game-board');
+
+    function drawBoard() {
+      gameBoard.innerHTML = '';
+      board.forEach((cell, index) => {
+        const div = document.createElement('div');
+        div.classList.add('cell');
+        div.textContent = cell;
+        div.addEventListener('click', () => handleClick(index));
+        gameBoard.appendChild(div);
+      });
+    }
+
+    function handleClick(index) {
+      if (board[index] || !gameActive) return;
+      board[index] = currentPlayer;
+      drawBoard();
+      if (checkWin()) {
+        statusText.textContent = `Player ${currentPlayer} wins!`;
+        gameActive = false;
+      } else if (board.every(cell => cell)) {
+        statusText.textContent = "It's a draw!";
+        gameActive = false;
+      } else {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        statusText.textContent = `Player ${currentPlayer}'s turn`;
+      }
+    }
+
+    function checkWin() {
+      const winPatterns = [
+        [0,1,2], [3,4,5], [6,7,8], // rows
+        [0,3,6], [1,4,7], [2,5,8], // columns
+        [0,4,8], [2,4,6]           // diagonals
+      ];
+      return winPatterns.some(pattern => {
+        const [a, b, c] = pattern;
+        return board[a] && board[a] === board[b] && board[a] === board[c];
+      });
+    }
+
+    function restartGame() {
+      for (let i = 0; i < 9; i++) board[i] = null;
+      currentPlayer = 'X';
+      gameActive = true;
+      statusText.textContent = "Player X's turn";
+      drawBoard();
+    }
+
+    drawBoard();
+  </script>
+
+</body>
+</html>
