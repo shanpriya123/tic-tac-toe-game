@@ -3,25 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <title>Tic Tac Toe</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: yellow;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    .players {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 10px 0;
+    }
+    .player {
+      padding: 10px 20px;
+      border: 2px solid black;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    #currentPlayer {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 10px;
+      justify-content: center;
+      margin: 20px auto;
+      background-color: blue;
+      padding: 10px;
+      border-radius: 10px;
+      width: max-content;
+    }
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: white;
+      font-size: 2.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .highlight-x {
+      background-color: yellow;
+    }
+    .highlight-o {
+      background-color: lightblue;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 15px;
+      border-radius: 8px;
+      border: 1px solid black;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <h1>Tic Tac Toe</h1>
-  <div class="board" id="board">
-    <!-- 9 cells -->
-    <div class="cell" data-index="0"></div>
-    <div class="cell" data-index="1"></div>
-    <div class="cell" data-index="2"></div>
-    <div class="cell" data-index="3"></div>
-    <div class="cell" data-index="4"></div>
-    <div class="cell" data-index="5"></div>
-    <div class="cell" data-index="6"></div>
-    <div class="cell" data-index="7"></div>
-    <div class="cell" data-index="8"></div>
-  </div>
-  <div class="status" id="status">Player X's Turn</div>
-  <button id="resetBtn">Reset Game</button>
 
-  <script src="script.js"></script>
+  <h1>Tic Tac Toe</h1>
+
+  <div class="players">
+    <div class="player" style="background-color: yellow;">Player 1: X</div>
+    <div class="player" style="background-color: lightblue;">Player 2: O</div>
+  </div>
+
+  <div id="currentPlayer" style="background-color: yellow;">Current Player: X</div>
+
+  <div class="board" id="board"></div>
+
+  <button onclick="restartGame()">Restart</button>
+
+  <script>
+    const board = document.getElementById('board');
+    const currentPlayerText = document.getElementById('currentPlayer');
+    let currentPlayer = 'X';
+
+    function createBoard() {
+      board.innerHTML = '';
+      for (let i = 0; i < 9; i++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.addEventListener('click', () => handleCellClick(cell), { once: true });
+        board.appendChild(cell);
+      }
+    }
+
+    function handleCellClick(cell) {
+      cell.textContent = currentPlayer;
+      cell.classList.add(currentPlayer === 'X' ? 'highlight-x' : 'highlight-o');
+      switchPlayer();
+    }
+
+    function switchPlayer() {
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+      currentPlayerText.textContent = `Current Player: ${currentPlayer}`;
+      currentPlayerText.style.backgroundColor = currentPlayer === 'X' ? 'yellow' : 'lightblue';
+    }
+
+    function restartGame() {
+      currentPlayer = 'X';
+      currentPlayerText.textContent = `Current Player: ${currentPlayer}`;
+      currentPlayerText.style.backgroundColor = 'yellow';
+      createBoard();
+    }
+
+    createBoard();
+  </script>
+
 </body>
 </html>
