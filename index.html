@@ -124,3 +124,45 @@
 
 </body>
 </html>
+
+
+
+
+<!-- ✅ Music Code -->
+  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  
+
+  <script>
+    const bgMusic = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+
+    // 💡 Mobile requires user action, so trigger music on any click
+    window.addEventListener("click", () => {
+      bgMusic.play();
+      musicBtn.innerText = "Pause Music";
+    }, { once: true });
+
+    function toggleMusic() {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        musicBtn.innerText = "Pause Music";
+      } else {
+        bgMusic.pause();
+        musicBtn.innerText = "Play Music";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+<audio id="bgMusic" autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
