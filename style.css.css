@@ -14,7 +14,7 @@ h1 {
   grid-template-columns: repeat(3, 100px);
   grid-gap: 10px;
   justify-content: center;
-  margin: 20px auto;
+  margin: 10px auto;
 }
 
 .cell {
@@ -43,5 +43,6 @@ button {
   font-size: 1em;
   cursor: pointer;
 }
+
 
 
