@@ -46,3 +46,10 @@ button {
 
 
 
+#result-box{
+  background-color: blue;
+  width:300px;
+  height: 200px;
+  border-radius: 10px;
+  margin: 20px auto ;
+  
