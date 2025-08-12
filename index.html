@@ -237,36 +237,41 @@
 
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Tic Tac Toe - Login</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container">
-    <h1>Tic Tac Toe 🎮</h1>
-    <form id="playerForm">
-      <input type="text" id="player1" placeholder="Player 1 Name" required>
-      <input type="text" id="player2" placeholder="Player 2 Name" required>
-      <button type="submit">Start Game</button>
-    </form>
-  </div>
+<form action="game.html" method="GET">
+    <label>Player 1 Name:</label>
+    <input type="text" name="player1" required><br><br>
 
-  <script>
-    document.getElementById("playerForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const player1 = document.getElementById("player1").value;
-      const player2 = document.getElementById("player2").value;
+    <label>Player 2 Name:</label>
+    <input type="text" name="player2" required><br><br>
 
-      // You can redirect or store the names
-      localStorage.setItem("player1", player1);
-      localStorage.setItem("player2", player2);
+    <button type="submit">Start Game</button>
+</form>
 
-      // Redirect to game page
-      window.location.href = "game.html";
-    });
-  </script>
-</body>
-</html>
+
+<div class="instructions">
+    <h2>How to Play</h2>
+    <ul>
+        <li>Two players take turns.</li>
+        <li>One uses X, the other uses O.</li>
+        <li>First to get three in a row wins!</li>
+    </ul>
+</div>
+
+
+<button onclick="toggleTheme()">Toggle Dark Mode</button>
+
+<script>
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+}
+</script>
+
+
+<audio id="clickSound" src="click.mp3"></audio>
+<button onclick="playSound()">Click Me</button>
+
+<script>
+function playSound() {
+    document.getElementById('clickSound').play();
+}
+</script>
