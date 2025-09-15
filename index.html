@@ -388,19 +388,55 @@
 
 
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Tic Tac Toe</title>
-  <style>
-    body {
-      background: linear-gradient(135deg,#74ebd5,#ACB6E5);
-      height: 100vh;
-      margin: 0;
-    }
-  </style>
-</head>
-<body>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #74ebd5, #9face6);
+    margin: 0;
+    padding: 20px;
+  }
+
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-gap: 10px;
+    justify-content: center;
+    margin: 30px auto;
+  }
+
+  .cell {
+    width: 120px;
+    height: 120px;
+    background: white;
+    border-radius: 20px;
+    font-size: 50px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 3px solid #444;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  .cell:hover {
+    background: #f5f5f5;
+    transform: scale(1.05);
+  }
+
+  .cell.taken {
+    cursor: not-allowed;
+    color: #ff5733; /* X or O color after placed */
+  }
+
+  h1 {
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  }
+</style>
 
 
 
